@@ -17,14 +17,15 @@ interface Banner {
   is_active: boolean
 }
 
+type BannerUpdate = Omit<Banner, 'id'>
+
 export default function AdminBannersPage() {
   const [banners, setBanners] = useState<Banner[]>([])
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
   const [editingId, setEditingId] = useState<string | null>(null)
   
-  const [formData, setFormData] = useState<Banner>({
-    id: '',
+  const [formData, setFormData] = useState<BannerUpdate>({
     title: '',
     image_url: '',
     link_url: '',
@@ -82,7 +83,6 @@ export default function AdminBannersPage() {
   function handleEdit(banner: Banner) {
     setEditingId(banner.id)
     setFormData({
-      id: banner.id,
       title: banner.title || '',
       image_url: banner.image_url,
       link_url: banner.link_url || '',
@@ -111,7 +111,6 @@ export default function AdminBannersPage() {
 
   function resetForm() {
     setFormData({
-      id: '',
       title: '',
       image_url: '',
       link_url: '',

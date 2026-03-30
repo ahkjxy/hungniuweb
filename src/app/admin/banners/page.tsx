@@ -23,7 +23,8 @@ export default function AdminBannersPage() {
   const [showForm, setShowForm] = useState(false)
   const [editingId, setEditingId] = useState<string | null>(null)
   
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Banner>({
+    id: '',
     title: '',
     image_url: '',
     link_url: '',
@@ -81,6 +82,7 @@ export default function AdminBannersPage() {
   function handleEdit(banner: Banner) {
     setEditingId(banner.id)
     setFormData({
+      id: banner.id,
       title: banner.title || '',
       image_url: banner.image_url,
       link_url: banner.link_url || '',
@@ -109,6 +111,7 @@ export default function AdminBannersPage() {
 
   function resetForm() {
     setFormData({
+      id: '',
       title: '',
       image_url: '',
       link_url: '',
@@ -143,7 +146,7 @@ export default function AdminBannersPage() {
             <Label htmlFor="title">标题</Label>
             <Input
               id="title"
-              value={formData.title}
+              value={formData.title || ''}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
               placeholder="显示在轮播图上的标题"
             />
@@ -166,7 +169,7 @@ export default function AdminBannersPage() {
             <Label htmlFor="link_url">跳转链接</Label>
             <Input
               id="link_url"
-              value={formData.link_url}
+              value={formData.link_url || ''}
               onChange={(e) => setFormData({ ...formData, link_url: e.target.value })}
               placeholder="/category/xxx 或 https://..."
             />

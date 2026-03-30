@@ -13,7 +13,10 @@ async function getPageData() {
       ContentService.getCompanyInfo(),
       SiteSettingsService.getSettingsAsObject(),
     ])
-    return { companyInfo, siteSettings }
+    return { 
+      companyInfo: companyInfo as any, 
+      siteSettings: siteSettings as any 
+    }
   } catch (error) {
     console.error('Failed to load page data:', error)
     return { companyInfo: null, siteSettings: {} }

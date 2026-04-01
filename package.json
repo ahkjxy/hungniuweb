@@ -9,7 +9,9 @@
     "dev": "next dev",
     "build": "next build --no-lint",
     "start": "next start",
-    "lint": "eslint --no-eslintrc --rule '{\"no-unused-vars\": \"off\"}' src/ || true"
+    "lint": "eslint --no-eslintrc --rule '{\"no-unused-vars\": \"off\"}' src/ || true",
+    "build:prod": "NODE_OPTIONS='--max-old-space-size=4096' next build --no-lint",
+    "install:clean": "rm -rf node_modules .next && npm install --legacy-peer-deps --ignore-engines"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.0.5",

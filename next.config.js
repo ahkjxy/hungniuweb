@@ -19,11 +19,6 @@ const nextConfig = {
   // 跳过 ESLint 检查
   eslint: {
     ignoreDuringBuilds: true,
-  },
-  // Node.js 版本检查（允许使用 Node.js 16）
-  experimental: {
-    // 禁用某些需要 Node.js 18+ 的特性以避免兼容性问题
-    serverActions: false,
   }
 }
 

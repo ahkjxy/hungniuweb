@@ -47,7 +47,7 @@ export default async function ArticlesPage() {
             <Link key={article.id} href={`/article/${article.id}`}>
               <article className="group cursor-pointer">
                 {/* 封面图 */}
-                <div className="relative aspect-[16/9] rounded-lg overflow-hidden bg-brand-beige/20 mb-4">
+                <div className="relative aspect-[16/9] rounded-lg overflow-hidden bg-brand-cream/20 mb-4">
                   {article.cover ? (
                     <Image
                       src={article.cover}

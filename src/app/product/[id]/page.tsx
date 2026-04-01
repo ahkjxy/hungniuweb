@@ -69,7 +69,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       {/* 商品详情 */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
         {/* 商品图片 */}
-        <div className="relative aspect-square rounded-lg overflow-hidden bg-brand-beige/20">
+        <div className="relative aspect-square rounded-lg overflow-hidden bg-brand-cream/20">
           {product.cover ? (
             <Image
               src={product.cover}
@@ -163,7 +163,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             {relatedProducts.map((p) => (
               <Link key={p.id} href={`/product/${p.id}`}>
                 <div className="group cursor-pointer">
-                  <div className="relative aspect-square rounded-lg overflow-hidden bg-brand-beige/20 mb-4">
+                  <div className="relative aspect-square rounded-lg overflow-hidden bg-brand-cream/20 mb-4">
                     {p.cover ? (
                       <Image
                         src={p.cover}

@@ -35,7 +35,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* 使用说明 */}
-      <div className="mt-12 p-6 bg-brand-beige/30 rounded-lg">
+      <div className="mt-12 p-6 bg-brand-cream/30 rounded-lg">
         <h3 className="text-lg font-bold mb-4">💡 快速开始</h3>
         <ol className="space-y-2 text-muted-foreground list-decimal list-inside">
           <li>首次使用请先在 Supabase 控制台创建用户</li>

@@ -39,7 +39,7 @@ export class ProductService {
       .eq('status', 'active')
       .eq('is_featured', true)
       .limit(limit)
-      .order('sort_order', { ascending: true })
+      .order('created_at', { ascending: false })
     
     if (error) throw error
     return data

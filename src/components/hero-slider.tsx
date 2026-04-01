@@ -36,7 +36,7 @@ export function HeroSlider() {
 
   if (banners.length === 0) {
     return (
-      <div className="relative h-[400px] md:h-[600px] bg-brand-beige animate-pulse" />
+      <div className="relative h-[400px] md:h-[600px] bg-brand-cream animate-pulse" />
     )
   }
 

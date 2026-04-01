@@ -48,30 +48,15 @@ export default async function HomePage() {
   return (
     <div className="flex flex-col">
       {/* Hero Slider */}
-      <Suspense fallback={<div className="h-[400px] md:h-[600px] bg-brand-beige animate-pulse" />}>
+      <Suspense fallback={<div className="h-[400px] md:h-[600px] bg-brand-cream animate-pulse" />}>
         <HeroSlider />
       </Suspense>
-
-      {/* 订购入口 */}
-      <section className="bg-brand-cream py-12 border-b">
-        <div className="container">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold mb-4 text-brand-green">
-              便捷下单 美味即达
-            </h2>
-            <p className="text-muted-foreground">
-              多个平台任选，轻松购买优质农产品
-            </p>
-          </div>
-          <OrderLinks />
-        </div>
-      </section>
 
       {/* 产品分类 */}
       <section className="py-16">
         <div className="container">
           <h2 className="text-3xl font-bold text-center mb-12 text-brand-green">
-            产品分类
+            {siteSettings.home_category_title || '产品分类'}
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -104,10 +89,10 @@ export default async function HomePage() {
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4 text-brand-green">
-              精选推荐
+              {siteSettings.home_featured_title || '精选推荐'}
             </h2>
             <p className="text-muted-foreground">
-              精心挑选的优质产品，为您呈现最佳口感
+              {siteSettings.home_featured_subtitle || '精心挑选的优质产品，为您呈现最佳口感'}
             </p>
           </div>
 

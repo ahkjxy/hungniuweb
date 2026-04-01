@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ContentService } from '@/lib/supabase/content'
 import { SiteSettingsService } from '@/lib/supabase/site-settings'
+import { CategoryService } from '@/lib/supabase/categories'
 import { OrderLinks } from '@/components/order-links'
 
 export const dynamic = 'force-dynamic'
@@ -9,22 +10,24 @@ export const dynamic = 'force-dynamic'
 // 获取页面数据
 async function getPageData() {
   try {
-    const [companyInfo, siteSettings] = await Promise.all([
+    const [companyInfo, siteSettings, categories] = await Promise.all([
       ContentService.getCompanyInfo(),
       SiteSettingsService.getSettingsAsObject(),
+      CategoryService.getParentCategories(),
     ])
     return { 
       companyInfo: companyInfo as any, 
-      siteSettings: siteSettings as any 
+      siteSettings: siteSettings as any,
+      categories: categories || []
     }
   } catch (error) {
     console.error('Failed to load page data:', error)
-    return { companyInfo: null, siteSettings: {} }
+    return { companyInfo: null, siteSettings: {}, categories: [] }
   }
 }
 
 export default async function AboutPage() {
-  const { companyInfo, siteSettings } = await getPageData()
+  const { companyInfo, siteSettings, categories } = await getPageData()
 
   return (
     <div className="container py-12">
@@ -61,7 +64,7 @@ export default async function AboutPage() {
               {companyInfo?.content || siteSettings.about_story_content || 
                 `我们专注于提供优质天然的农产品，从源头把控品质。自有牧场位于内蒙古大草原，采用传统养殖方式，确保每一块肉品都新鲜健康。芝麻油采用古法小磨工艺，保留最纯粹的香味。
 
-黄老板坚持"品质第一，顾客至上"的理念，为您提供最放心的农产品。`}
+坚持"品质第一，顾客至上"的理念，为您提供最放心的农产品。`}
             </p>
           </div>
         </div>
@@ -119,47 +122,29 @@ export default async function AboutPage() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-gradient-to-br from-red-700 to-red-900 group cursor-pointer hover:shadow-xl transition-all">
-            <Link href="/category?parent=beef" className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center p-6">
-                <div className="text-6xl mb-4">🐄</div>
-                <h3 className="text-2xl font-bold text-white mb-2">
-                  {siteSettings.about_product_beef_title || '牛肉类'}
-                </h3>
-                <p className="text-white/80 text-sm">
-                  {siteSettings.about_product_beef_desc || '优质新鲜牛肉产品'}
-                </p>
-              </div>
-            </Link>
-          </div>
-
-          <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-gradient-to-br from-orange-600 to-orange-800 group cursor-pointer hover:shadow-xl transition-all">
-            <Link href="/category?parent=lamb" className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center p-6">
-                <div className="text-6xl mb-4">🐑</div>
-                <h3 className="text-2xl font-bold text-white mb-2">
-                  {siteSettings.about_product_lamb_title || '羊肉类'}
-                </h3>
-                <p className="text-white/80 text-sm">
-                  {siteSettings.about_product_lamb_desc || '天然牧场羊肉产品'}
-                </p>
-              </div>
-            </Link>
-          </div>
-
-          <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-gradient-to-br from-yellow-600 to-yellow-800 group cursor-pointer hover:shadow-xl transition-all">
-            <Link href="/category?parent=sesame" className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center p-6">
-                <div className="text-6xl mb-4">🌰</div>
-                <h3 className="text-2xl font-bold text-white mb-2">
-                  {siteSettings.about_product_sesame_title || '芝麻油类'}
-                </h3>
-                <p className="text-white/80 text-sm">
-                  {siteSettings.about_product_sesame_desc || '传统工艺芝麻油'}
-                </p>
-              </div>
-            </Link>
-          </div>
+          {categories.map((category: any) => (
+            <div 
+              key={category.id}
+              className="relative aspect-[4/3] rounded-lg overflow-hidden bg-gradient-to-br from-brand-green to-brand-green/80 group cursor-pointer hover:shadow-xl transition-all"
+            >
+              <Link href={`/category/${category.id}`} className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center p-6">
+                  <div className="text-6xl mb-4">
+                    {category.name.includes('牛肉') && '🐄'}
+                    {category.name.includes('羊肉') && '🐑'}
+                    {category.name.includes('芝麻') && '🌰'}
+                    {!category.name.includes('牛肉') && !category.name.includes('羊肉') && !category.name.includes('芝麻') && '🏷️'}
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2">
+                    {category.name}
+                  </h3>
+                  <p className="text-white/80 text-sm">
+                    {category.description || `${category.name}产品`}
+                  </p>
+                </div>
+              </Link>
+            </div>
+          ))}
         </div>
       </section>
 

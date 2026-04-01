@@ -7,17 +7,11 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ImageUploader } from '@/components/image-uploader'
 import Image from 'next/image'
+import type { Database } from '@/lib/supabase/database.types'
 
-interface Banner {
-  id: string
-  title: string | null
-  image_url: string
-  link_url: string | null
-  sort_order: number
-  is_active: boolean
-}
-
-type BannerUpdate = Omit<Banner, 'id'>
+type Banner = Database['public']['Tables']['banners']['Row']
+type BannerInsert = Database['public']['Tables']['banners']['Insert']
+type BannerUpdate = Database['public']['Tables']['banners']['Update']
 
 export default function AdminBannersPage() {
   const [banners, setBanners] = useState<Banner[]>([])
@@ -58,16 +52,30 @@ export default function AdminBannersPage() {
     
     try {
       if (editingId) {
+        // 更新轮播图
         const { error } = await supabase
           .from('banners')
-          .update(formData)
+          .update({
+            title: formData.title,
+            image_url: formData.image_url,
+            link_url: formData.link_url,
+            sort_order: formData.sort_order,
+            is_active: formData.is_active,
+          } as Database['public']['Tables']['banners']['Update'])
           .eq('id', editingId)
         
         if (error) throw error
       } else {
+        // 创建轮播图
         const { error } = await supabase
           .from('banners')
-          .insert(formData)
+          .insert({
+            title: formData.title || null,
+            image_url: formData.image_url,
+            link_url: formData.link_url || null,
+            sort_order: formData.sort_order || 0,
+            is_active: formData.is_active ?? true,
+          } as Database['public']['Tables']['banners']['Insert'])
         
         if (error) throw error
       }

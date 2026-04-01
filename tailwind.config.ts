@@ -52,13 +52,14 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // 农产品定制颜色
+        // 农产品定制颜色 - 淋淋园供应链配色
         brand: {
-          beige: '#F5E6D3',
-          green: '#2D5016',
-          gold: '#D4AF37',
-          cream: '#FFF8F0',
-          brown: '#8B4513',
+          green: '#2D9D5C',    // 主色调 - 翠绿色
+          darkGreen: '#1E6B3F',// 深绿色
+          gold: '#FFD700',     // 金色
+          beige: '#F5F9F7',    // 浅米白背景（带绿调）
+          cream: '#FFFFFF',    // 纯白色
+          brown: '#6B4423',    // 棕色
         },
       },
       borderRadius: {

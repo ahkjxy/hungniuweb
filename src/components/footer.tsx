@@ -1,15 +1,19 @@
 import Link from 'next/link'
 import { SiteSettingsService } from '@/lib/supabase/site-settings'
+import { CategoryService } from '@/lib/supabase/categories'
 
 export async function Footer() {
-  const settings = await SiteSettingsService.getSettingsAsObject()
+  const [settings, categories] = await Promise.all([
+    SiteSettingsService.getSettingsAsObject(),
+    CategoryService.getParentCategories(),
+  ])
   
   const currentYear = new Date().getFullYear()
-  const copyrightText = settings.footer_text || `© ${currentYear} 淋淋园牛羊肉 版权所有`
-  const icpLicense = settings.icp_license || '京 ICP 备 XXXXXXXX 号'
-  const wechat = settings.wechat || 'huanglaoban'
-  const phone = settings.phone || '400-XXX-XXXX'
-  const email = settings.email || 'contact@huanglaoban.com'
+  const copyrightText = settings.footer_text || `© ${currentYear} ${settings.site_name || '淋淋园牛羊肉'} 版权所有`
+  const icpLicense = settings.icp_license || ''
+  const wechat = settings.wechat || ''
+  const phone = settings.phone || ''
+  const email = settings.email || ''
   const siteName = settings.site_name || '淋淋园牛羊肉'
 
   return (
@@ -55,21 +59,20 @@ export async function Footer() {
           <div>
             <h4 className="font-semibold mb-4">产品分类</h4>
             <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/category?parent=beef" className="text-white/80 hover:text-white transition-colors">
-                  牛肉类
-                </Link>
-              </li>
-              <li>
-                <Link href="/category?parent=lamb" className="text-white/80 hover:text-white transition-colors">
-                  羊肉类
-                </Link>
-              </li>
-              <li>
-                <Link href="/category?parent=sesame" className="text-white/80 hover:text-white transition-colors">
-                  芝麻油类
-                </Link>
-              </li>
+              {categories && categories.length > 0 ? (
+                categories.map((category: any) => (
+                  <li key={category.id}>
+                    <Link 
+                      href={`/category/${category.id}`} 
+                      className="text-white/80 hover:text-white transition-colors"
+                    >
+                      {category.name}
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <li className="text-white/60">暂无分类</li>
+              )}
             </ul>
           </div>
 

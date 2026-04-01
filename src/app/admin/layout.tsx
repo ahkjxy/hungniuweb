@@ -118,38 +118,38 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
             <nav className="flex flex-col gap-2">
               <Link 
                 href="/admin" 
-                className="px-4 py-2 rounded-lg hover:bg-brand-beige/30 transition-colors"
+                className="px-4 py-2 rounded-lg hover:bg-brand-cream/30 transition-colors"
               >
                 概览
               </Link>
               <Link 
                 href="/admin/products" 
-                className="px-4 py-2 rounded-lg hover:bg-brand-beige/30 transition-colors"
+                className="px-4 py-2 rounded-lg hover:bg-brand-cream/30 transition-colors"
               >
                 商品管理
               </Link>
               <Link 
                 href="/admin/categories" 
-                className="px-4 py-2 rounded-lg hover:bg-brand-beige/30 transition-colors"
+                className="px-4 py-2 rounded-lg hover:bg-brand-cream/30 transition-colors"
               >
                 分类管理
               </Link>
               <Link 
                 href="/admin/articles" 
-                className="px-4 py-2 rounded-lg hover:bg-brand-beige/30 transition-colors"
+                className="px-4 py-2 rounded-lg hover:bg-brand-cream/30 transition-colors"
               >
                 文章管理
               </Link>
               <div className="pt-2 border-t"></div>
               <Link 
                 href="/admin/banners" 
-                className="px-4 py-2 rounded-lg hover:bg-brand-beige/30 transition-colors"
+                className="px-4 py-2 rounded-lg hover:bg-brand-cream/30 transition-colors"
               >
                 轮播图管理
               </Link>
               <Link 
                 href="/admin/settings" 
-                className="px-4 py-2 rounded-lg hover:bg-brand-beige/30 transition-colors"
+                className="px-4 py-2 rounded-lg hover:bg-brand-cream/30 transition-colors"
               >
                 网站配置
               </Link>
@@ -157,7 +157,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
               <Link 
                 href="/" 
                 target="_blank"
-                className="px-4 py-2 rounded-lg hover:bg-brand-beige/30 transition-colors"
+                className="px-4 py-2 rounded-lg hover:bg-brand-cream/30 transition-colors"
               >
                 查看网站 →
               </Link>

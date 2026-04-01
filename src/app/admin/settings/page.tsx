@@ -186,6 +186,84 @@ export default function AdminSettingsPage() {
           </div>
         </div>
 
+        {/* 关于页面配置 */}
+        <div className="p-6 bg-gray-50 rounded-lg">
+          <h2 className="text-xl font-bold mb-4">关于页面配置</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="about_page_title">页面标题</Label>
+              <Input
+                id="about_page_title"
+                value={formData.about_page_title || ''}
+                onChange={(e) => updateField('about_page_title', e.target.value)}
+                placeholder="关于淋淋园牛羊肉"
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="about_page_subtitle">页面副标题</Label>
+              <Input
+                id="about_page_subtitle"
+                value={formData.about_page_subtitle || ''}
+                onChange={(e) => updateField('about_page_subtitle', e.target.value)}
+                placeholder="专注优质农产品，从草原到您的餐桌"
+              />
+            </div>
+          </div>
+
+          <div className="mt-4">
+            <Label htmlFor="about_story_content">品牌故事内容</Label>
+            <Textarea
+              id="about_story_content"
+              value={formData.about_story_content || ''}
+              onChange={(e) => updateField('about_story_content', e.target.value)}
+              rows={6}
+              placeholder="我们专注于提供优质天然的农产品..."
+            />
+            <p className="text-xs text-muted-foreground mt-1">
+              将显示在关于页面的品牌故事部分
+            </p>
+          </div>
+        </div>
+
+        {/* 首页配置 */}
+        <div className="p-6 bg-gray-50 rounded-lg">
+          <h2 className="text-xl font-bold mb-4">首页配置</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="home_category_title">分类区标题</Label>
+              <Input
+                id="home_category_title"
+                value={formData.home_category_title || ''}
+                onChange={(e) => updateField('home_category_title', e.target.value)}
+                placeholder="产品分类"
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="home_featured_title">推荐区标题</Label>
+              <Input
+                id="home_featured_title"
+                value={formData.home_featured_title || ''}
+                onChange={(e) => updateField('home_featured_title', e.target.value)}
+                placeholder="精选推荐"
+              />
+            </div>
+          </div>
+
+          <div className="mt-4">
+            <Label htmlFor="home_featured_subtitle">推荐区副标题</Label>
+            <Input
+              id="home_featured_subtitle"
+              value={formData.home_featured_subtitle || ''}
+              onChange={(e) => updateField('home_featured_subtitle', e.target.value)}
+              placeholder="精心挑选的优质产品，为您呈现最佳口感"
+            />
+          </div>
+        </div>
+
         <div className="flex items-center gap-4 pt-4">
           <Button type="submit" variant="brand" disabled={saving}>
             {saving ? '保存中...' : '保存配置'}

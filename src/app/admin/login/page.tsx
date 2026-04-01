@@ -60,7 +60,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-brand-beige/30 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-brand-cream/30 p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">{settings.login_page_title}</CardTitle>

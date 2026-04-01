@@ -16,7 +16,7 @@ export function ProductCard({ product }: ProductCardProps) {
     <Link href={`/product/${product.id}`}>
       <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 border-0 bg-white">
         {/* 商品图片 */}
-        <div className="relative aspect-square overflow-hidden bg-brand-beige/20">
+        <div className="relative aspect-square overflow-hidden bg-brand-cream/20">
           {product.cover ? (
             <Image
               src={product.cover}

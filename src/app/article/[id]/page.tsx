@@ -75,7 +75,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
         {/* 封面图 */}
         {article.cover && (
-          <div className="relative aspect-[16/9] rounded-lg overflow-hidden bg-brand-beige/20 mb-8">
+          <div className="relative aspect-[16/9] rounded-lg overflow-hidden bg-brand-cream/20 mb-8">
             <Image
               src={article.cover}
               alt={article.title}
@@ -123,7 +123,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               <Link key={a.id} href={`/article/${a.id}`}>
                 <article className="group cursor-pointer">
                   {a.cover && (
-                    <div className="relative aspect-[16/9] rounded-lg overflow-hidden bg-brand-beige/20 mb-4">
+                    <div className="relative aspect-[16/9] rounded-lg overflow-hidden bg-brand-cream/20 mb-4">
                       <Image
                         src={a.cover}
                         alt={a.title}

@@ -19,6 +19,10 @@ const nextConfig = {
   // 跳过 ESLint 检查
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  // Next.js 13 中启用 App Router 支持（实验性但稳定）
+  experimental: {
+    appDir: true,
   }
 }
 

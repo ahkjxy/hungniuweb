@@ -6,6 +6,7 @@
 - **Node.js**: >=16.0.0
 - **React**: 18.2.0
 - **TypeScript**: 5.3.3
+- **App Router**: ✅ 已启用（通过 experimental.appDir）
 
 ---
 
@@ -14,20 +15,79 @@
 ### 优势
 - ✅ **完全兼容 Node.js 16** - 无需升级到 Node.js 18
 - ✅ **稳定性高** - 经过长期验证，生产环境广泛使用
-- ✅ **功能完整** - 支持 SSR、SSG、API Routes 等所有核心功能
+- ✅ **功能完整** - 支持 SSR、SSG、API Routes、App Router 等所有核心功能
 - ✅ **性能优秀** - 自动代码分割、图片优化等
+- ✅ **App Router 支持** - 使用最新的文件路由系统
 
 ### 与 Next.js 14 的区别
 | 特性 | Next.js 13 | Next.js 14 |
 |------|-----------|-----------|
 | Node.js 要求 | 16.0+ | 18.17+ |
 | Server Actions | ❌ 不支持 | ✅ 支持 |
+| App Router | ✅ 实验性但稳定 | ✅ 默认启用 |
 | Turbopack | ⚠️ 实验性 | ✅ 稳定 |
 | 稳定性 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
 
 **结论**：对于不需要 Server Actions 的项目，Next.js 13 是更稳定的选择。
 
 ---
+
+## 🔧 Next.js 13 特殊配置
+
+### next.config.js 配置
+
+```javascript
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.supabase.co',
+      },
+    ],
+  },
+  output: 'standalone',
+  productionBrowserSourceMaps: false,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  // 在 Next.js 13 中启用 App Router
+  experimental: {
+    appDir: true,
+  }
+}
+
+module.exports = nextConfig
+```
+
+**重要**：Next.js 13 需要显式启用 `appDir` 才能使用 App Router。
+
+### 组件指令
+
+#### 客户端组件（需要交互）
+```tsx
+'use client'
+
+import { useState } from 'react'
+
+export default function MyComponent() {
+  // 可以使用 hooks 和事件处理
+}
+```
+
+#### 服务端组件（默认，纯展示）
+```tsx
+// 不需要 'use client'
+// 可以直接使用 async/await
+
+export default async function Page() {
+  const data = await fetchData()
+  return <div>{data}</div>
+}
+```
 
 ## 📋 部署方式
 
